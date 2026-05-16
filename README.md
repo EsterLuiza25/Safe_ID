@@ -1,25 +1,28 @@
-# SafeGuard ID
+# 🛡️ SafeGuard ID
 
 API backend para autorização de transações com avaliação de risco, desenvolvida com Django, Django REST Framework, PostgreSQL, Redis e Swagger/OpenAPI.
 
 O projeto recebe uma transação, captura dados da requisição, calcula o risco, salva a decisão no banco e retorna se a operação foi aprovada ou rejeitada.
 
-## Sumário
+## 📌 Sumário
 
-- [Stack](#stack)
-- [Funcionalidades](#funcionalidades)
-- [Demonstração e evidências técnicas](#demonstração-e-evidências-técnicas)
-- [Arquitetura](#arquitetura)
-- [Como rodar](#como-rodar)
-- [Variáveis de ambiente](#variáveis-de-ambiente)
-- [Endpoints](#endpoints)
-- [Exemplos](#exemplos)
-- [Testes](#testes)
-- [Documentação](#documentação)
-- [Docker](#docker)
-- [Status do projeto](#status-do-projeto)
+- [🚀 Stack](#stack)
+- [✅ Funcionalidades](#funcionalidades)
+- [📸 Demonstração e evidências técnicas](#demonstracao)
+- [🏗️ Arquitetura](#arquitetura)
+- [⚙️ Como rodar](#como-rodar)
+- [🔐 Variáveis de ambiente](#variaveis)
+- [🌐 Endpoints](#endpoints)
+- [🧪 Exemplos](#exemplos)
+- [✅ Testes](#testes)
+- [📚 Documentação](#documentacao)
+- [🐳 Docker](#docker)
+- [🟢 Status do projeto](#status)
+- [📋 Checklist antes de publicar no GitHub](#checklist)
 
-## Stack
+<a id="stack"></a>
+
+## 🚀 Stack
 
 - Python 3.12
 - Django 5.0
@@ -29,7 +32,9 @@ O projeto recebe uma transação, captura dados da requisição, calcula o risco
 - drf-spectacular
 - Docker Compose
 
-## Funcionalidades
+<a id="funcionalidades"></a>
+
+## ✅ Funcionalidades
 
 - Autorização de transações via API REST.
 - Captura automática de IP e User-Agent.
@@ -44,25 +49,29 @@ O projeto recebe uma transação, captura dados da requisição, calcula o risco
 - Swagger UI em `/api/docs/`.
 - Testes automatizados com DRF `APITestCase`.
 
-## Demonstração e evidências técnicas
+<a id="demonstracao"></a>
+
+## 📸 Demonstração e evidências técnicas
 
 Abaixo estão os registros visuais do sistema em funcionamento, validando a infraestrutura com serviços isolados e a documentação interativa da API.
 
 > Antes de publicar no GitHub, salve os prints abaixo em `docs/images/` com exatamente estes nomes: `docker_containers.jpeg` e `swagger_docs.jpeg`.
 
-### 1. Orquestração da infraestrutura
+### 1. 🐳 Orquestração da infraestrutura
 
 Ambiente de infraestrutura isolado e operando com os serviços ativos em segundo plano de forma saudável.
 
 ![Docker Containers](docs/images/docker_containers.jpeg)
 
-### 2. Documentação do contrato da API
+### 2. 📚 Documentação do contrato da API
 
 Interface interativa mapeando os endpoints de autorização, listagem e consulta detalhada da API.
 
 ![Swagger Documentation](docs/images/swagger_docs.jpeg)
 
-## Arquitetura
+<a id="arquitetura"></a>
+
+## 🏗️ Arquitetura
 
 ```text
 Safe ID/
@@ -95,30 +104,32 @@ Safe ID/
 +-- manage.py
 ```
 
-## Como rodar
+<a id="como-rodar"></a>
 
-### 1. Clonar o repositório
+## ⚙️ Como rodar
+
+### 1. 📥 Clonar o repositório
 
 ```powershell
 git clone <url-do-repositorio>
 cd "Safe ID"
 ```
 
-### 2. Criar e ativar o ambiente virtual
+### 2. 🐍 Criar e ativar o ambiente virtual
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\activate
 ```
 
-### 3. Instalar dependências
+### 3. 📦 Instalar dependências
 
 ```powershell
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 4. Configurar variáveis de ambiente
+### 4. 🔐 Configurar variáveis de ambiente
 
 Crie o arquivo `.env` a partir do exemplo:
 
@@ -128,7 +139,7 @@ copy .env.example .env
 
 Para desenvolvimento local, o `.env.example` já vem com valores compatíveis com o `docker-compose.yml`.
 
-### 5. Subir PostgreSQL e Redis
+### 5. 🐳 Subir PostgreSQL e Redis
 
 ```powershell
 docker compose up -d
@@ -147,13 +158,13 @@ safeguard_postgres   healthy   0.0.0.0:5434->5432/tcp
 safeguard_redis      healthy   0.0.0.0:6379->6379/tcp
 ```
 
-### 6. Aplicar migrations
+### 6. 🗄️ Aplicar migrations
 
 ```powershell
 python manage.py migrate
 ```
 
-### 7. Criar superusuário opcional
+### 7. 👤 Criar superusuário opcional
 
 Use para acessar o Django Admin e gerenciar a blacklist:
 
@@ -161,7 +172,7 @@ Use para acessar o Django Admin e gerenciar a blacklist:
 python manage.py createsuperuser
 ```
 
-### 8. Iniciar API
+### 8. ▶️ Iniciar API
 
 ```powershell
 python manage.py runserver 127.0.0.1:8000
@@ -179,7 +190,9 @@ Swagger:
 http://127.0.0.1:8000/api/docs/
 ```
 
-## Variáveis de ambiente
+<a id="variaveis"></a>
+
+## 🔐 Variáveis de ambiente
 
 Exemplo:
 
@@ -205,7 +218,9 @@ REDIS_URL=redis://localhost:6379/0
 
 > Os valores acima são exemplos para ambiente local. Não publique o arquivo `.env` com credenciais reais.
 
-## Endpoints
+<a id="endpoints"></a>
+
+## 🌐 Endpoints
 
 Todos os endpoints da API exigem o header:
 
@@ -230,9 +245,11 @@ GET /api/transactions/?status=REJECTED
 GET /api/transactions/?customer_id=customer-123
 ```
 
-## Exemplos
+<a id="exemplos"></a>
 
-### Autorizar transação aprovada
+## 🧪 Exemplos
+
+### ✅ Autorizar transação aprovada
 
 ```powershell
 curl -X POST http://127.0.0.1:8000/api/transactions/authorize/ `
@@ -257,7 +274,7 @@ Resposta esperada:
 }
 ```
 
-### Autorizar transação rejeitada
+### ❌ Autorizar transação rejeitada
 
 ```json
 {
@@ -277,7 +294,7 @@ Resposta esperada:
 }
 ```
 
-## Regras de risco
+## ⚠️ Regras de risco
 
 | Regra | Condição | Resultado |
 | --- | --- | --- |
@@ -285,7 +302,7 @@ Resposta esperada:
 | Dispositivo bloqueado | fingerprint ativa na blacklist | `REJECTED` |
 | Baixo risco | nenhuma regra acionada | `APPROVED` |
 
-## Contrato de erro
+## 🧾 Contrato de erro
 
 Erros seguem o formato:
 
@@ -299,7 +316,9 @@ Erros seguem o formato:
 }
 ```
 
-## Testes
+<a id="testes"></a>
+
+## ✅ Testes
 
 Rodar testes automatizados:
 
@@ -314,14 +333,18 @@ python manage.py check
 python manage.py makemigrations --check --dry-run
 ```
 
-## Documentação
+<a id="documentacao"></a>
+
+## 📚 Documentação
 
 - PRD: [`docs/PRD.md`](docs/PRD.md)
 - Backlog: [`docs/BACKLOG.md`](docs/BACKLOG.md)
 - Swagger UI: `http://127.0.0.1:8000/api/docs/`
 - OpenAPI: `http://127.0.0.1:8000/api/schema/`
 
-## Docker
+<a id="docker"></a>
+
+## 🐳 Docker
 
 O `docker-compose.yml` sobe somente os serviços de infraestrutura:
 
@@ -343,11 +366,15 @@ Para remover também os volumes locais:
 docker compose down -v
 ```
 
-## Status do projeto
+<a id="status"></a>
+
+## 🟢 Status do projeto
 
 O backlog funcional e técnico está concluído. A API está pronta para execução local, testes e apresentação.
 
-## Checklist antes de publicar no GitHub
+<a id="checklist"></a>
+
+## 📋 Checklist antes de publicar no GitHub
 
 - Confirme que o arquivo `.env` não será enviado.
 - Confirme que a pasta `.venv/` não será enviada.
